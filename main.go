@@ -80,8 +80,8 @@ func main() {
 		data = append(data, conv)
 
 	}
-	fmt.Println("average :", math.Round(Average(data)))
+	fmt.Println("Average :", math.Round(Average(data)))
 	fmt.Println("Mediane :", math.Round(Mediane(data)))
 	fmt.Println("Variance :", math.Round(Variance(data)))
-	fmt.Println("standard deviation :", math.Round(standard_deviation(data)))
+	fmt.Println("Standard Deviation :", math.Round(standard_deviation(data)))
 }
