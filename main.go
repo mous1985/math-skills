@@ -25,14 +25,15 @@ func Average(data []float64) float64 {
 
 func Mediane(data []float64) float64 {
 	mediane := 0.0
+	m := len(data)
 	sort.Slice(data, func(i, j int) bool {
 		return data[i] < data[j]
 	})
 
 	if len(data)%2 == 0 {
-		mediane = (data[(len(data)-1)/2] + data[(len(data))/2]) / 2
+		mediane = (data[(m/2)-1] + data[(m)/2]) / 2
 	} else {
-		mediane = data[(len(data) / 2)]
+		mediane = data[(m / 2)]
 	}
 
 	return mediane
@@ -67,16 +68,20 @@ func main() {
 	cont := string(content)
 	// fmt.Print(cont)
 	str := strings.Split(cont, "\n")
+
 	// fmt.Print(str)
 	for i := 0; i < len(str); i++ {
+		if str[i] == "" {
+			continue
+		}
 
 		conv, _ := strconv.ParseFloat(str[i], i)
 
 		data = append(data, conv)
 
 	}
-	fmt.Println("average :", int(Average(data)))
-	fmt.Println("mediane : ", int(Mediane(data)))
-	fmt.Println("variance : ", int(Variance(data)))
-	fmt.Println("Standard deviation : ", int(standard_deviation(data)))
+	fmt.Println("average :", math.Round(Average(data)))
+	fmt.Println("Mediane :", math.Round(Mediane(data)))
+	fmt.Println("Variance :", math.Round(Variance(data)))
+	fmt.Println("standard deviation :", math.Round(standard_deviation(data)))
 }
