@@ -16,7 +16,10 @@ func Average(data []float64) float64 {
 	for _, i := range data {
 		sum += i
 	}
-	moyenne = sum / float64(m)
+	if m != 0 {
+		moyenne = sum / float64(m)
+		return moyenne
+	}
 	return moyenne
 }
 
@@ -27,10 +30,11 @@ func Mediane(data []float64) float64 {
 	})
 
 	if len(data)%2 == 0 {
-		mediane = (data[(len(data)-1)/2] + data[len(data)/2]) / 2
+		mediane = (data[(len(data)-1)/2] + data[(len(data))/2]) / 2
 	} else {
-		mediane = data[len(data)/2]
+		mediane = data[(len(data) / 2)]
 	}
+
 	return mediane
 }
 
@@ -38,15 +42,17 @@ func Variance(data []float64) float64 {
 	variance := 0.0
 
 	for _, k := range data {
-		s := k - Average(data)
-		variance += math.Pow(s, 2) / float64(len(data))
-
+		s := k - float64(Average(data))
+		if len(data) != 0 {
+			variance += math.Pow(s, 2) / float64(len(data))
+		}
 	}
 	return variance
 }
 
 func standard_deviation(data []float64) float64 {
-	ecarT := math.Sqrt(Variance(data))
+	ecarT := math.Sqrt(float64(Variance(data)))
+
 	return ecarT
 }
 
@@ -69,8 +75,8 @@ func main() {
 		data = append(data, conv)
 
 	}
-	fmt.Println("average :", Average(data))
-	fmt.Println("mediane : ", Mediane(data))
-	fmt.Println("variance : ", Variance(data))
-	fmt.Println("Standard deviation : ", standard_deviation(data))
+	fmt.Println("average :", int(Average(data)))
+	fmt.Println("mediane : ", int(Mediane(data)))
+	fmt.Println("variance : ", int(Variance(data)))
+	fmt.Println("Standard deviation : ", int(standard_deviation(data)))
 }
